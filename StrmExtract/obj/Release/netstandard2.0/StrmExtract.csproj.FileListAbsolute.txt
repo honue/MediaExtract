@@ -1,0 +1,11 @@
+C:\Users\menna\Source\Repos\MediaExtract\StrmExtract\bin\Release\netstandard2.0\StrmExtract.deps.json
+C:\Users\menna\Source\Repos\MediaExtract\StrmExtract\bin\Release\netstandard2.0\StrmExtract.dll
+C:\Users\menna\Source\Repos\MediaExtract\StrmExtract\bin\Release\netstandard2.0\StrmExtract.pdb
+C:\Users\menna\Source\Repos\MediaExtract\StrmExtract\obj\Release\netstandard2.0\StrmExtract.csproj.AssemblyReference.cache
+C:\Users\menna\Source\Repos\MediaExtract\StrmExtract\obj\Release\netstandard2.0\StrmExtract.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\menna\Source\Repos\MediaExtract\StrmExtract\obj\Release\netstandard2.0\StrmExtract.AssemblyInfoInputs.cache
+C:\Users\menna\Source\Repos\MediaExtract\StrmExtract\obj\Release\netstandard2.0\StrmExtract.AssemblyInfo.cs
+C:\Users\menna\Source\Repos\MediaExtract\StrmExtract\obj\Release\netstandard2.0\StrmExtract.csproj.CoreCompileInputs.cache
+C:\Users\menna\Source\Repos\MediaExtract\StrmExtract\obj\Release\netstandard2.0\StrmExtract.sourcelink.json
+C:\Users\menna\Source\Repos\MediaExtract\StrmExtract\obj\Release\netstandard2.0\StrmExtract.dll
+C:\Users\menna\Source\Repos\MediaExtract\StrmExtract\obj\Release\netstandard2.0\StrmExtract.pdb

@@ -15,6 +15,7 @@ using MediaBrowser.Controller.Entities;
 using MediaBrowser.Model.Configuration;
 using MediaBrowser.Controller.Providers;
 using System.Collections;
+using System.Linq;
 
 namespace StrmExtract
 {
@@ -41,7 +42,7 @@ namespace StrmExtract
 
         public async Task Execute(CancellationToken cancellationToken, IProgress<double> progress)
         {
-            _logger.Info("StrmExtract - Task Execute");
+            _logger.Info("MediaExtract - Task Execute");
 
             InternalItemsQuery query = new InternalItemsQuery();
 
@@ -50,23 +51,24 @@ namespace StrmExtract
             query.ExcludeItemTypes = new string[] { "Folder", "CollectionFolder", "UserView", "Series", "Season", "Trailer", "Playlist" };
 
             BaseItem[] results = _libraryManager.GetItemList(query);
-            _logger.Info("StrmExtract - Number of items before : " + results.Length);
+            _logger.Info("MediaExtract - Scan items : " + results.Length);
             List<BaseItem> items = new List<BaseItem>();
             foreach(BaseItem item in  results)
             {
                 if(!string.IsNullOrEmpty(item.Path) &&
-                    item.Path.EndsWith(".strm", StringComparison.InvariantCultureIgnoreCase) &&
+                    (item.Path.Contains("softlink") || item.Path.Contains("strm")) &&
                     item.GetMediaStreams().Count == 0)
                 {
                     items.Add(item);
+                    _logger.Info("MediaExtract - Item added : " + " - " + item.Path);
                 }
                 else
                 {
-                    _logger.Info("StrmExtract - Item dropped : " + item.Name + " - " + item.Path + " - " + item.GetType() + " - " + item.GetMediaStreams().Count);
+                    _logger.Info("MediaExtract - Item dropped : " + " - " + item.Path +  " - MediaStreams: " + item.GetMediaStreams().Count);
                 }
             }
 
-            _logger.Info("StrmExtract - Number of items after : " + items.Count);
+            _logger.Info("MediaExtract - Nums of targets : " + items.Count);
 
             double total = items.Count;
             int current = 0;
@@ -74,7 +76,7 @@ namespace StrmExtract
             {
                 if (cancellationToken.IsCancellationRequested)
                 {
-                    _logger.Info("StrmExtract - Task Cancelled");
+                    _logger.Info("MediaExtract - Task Cancelled");
                     break;
                 }
                 double percent_done = (current / total) * 100;
@@ -90,54 +92,34 @@ namespace StrmExtract
 
                 ItemUpdateType resp = await item.RefreshMetadata(options, cancellationToken);
 
-                _logger.Info("StrmExtract - " + current + "/" + total + " - " + item.Path);
+                _logger.Info("MediaExtract - " + current + "/" + total + " - " + item.Path);
 
                 //Thread.Sleep(5000);
                 current++;
             }
 
             progress.Report(100.0);
-            _logger.Info("StrmExtract - Task Complete");
-
-            /*
-            LibraryOptions lib_options = new LibraryOptions();
-            List<MediaSourceInfo> sources = item.GetMediaSources(true, true, lib_options);
-
-            _logger.Info("StrmExtract - GetMediaSources : " + sources.Count);
-
-            MediaInfoRequest request = new MediaInfoRequest();
-
-            MediaSourceInfo mediaSource = sources[0];
-            request.MediaSource = mediaSource;
-
-            _logger.Info("StrmExtract - GetMediaInfo");
-            MediaInfo info = await _mediaProbeManager.GetMediaInfo(request, cancellationToken);
-
-            _logger.Info("StrmExtract - Extracting Strm info " + info);
-
-            _logger.Info("StrmExtract - Extracting Strm info : url - " + info.DirectStreamUrl);
-            _logger.Info("StrmExtract - Extracting Strm info : runtime - " + info.RunTimeTicks);
-            */
+            _logger.Info("MediaExtract - Task Complete");
         }
 
         public string Category
         {
-            get { return "Strm Extract"; }
+            get { return "Media Extract"; }
         }
 
         public string Key
         {
-            get { return "StrmExtractTask"; }
+            get { return "MediaExtract Task"; }
         }
 
         public string Description
         {
-            get { return "Run Strm Media Info Extraction"; }
+            get { return "Run Media Info Extraction"; }
         }
 
         public string Name
         {
-            get { return "Process Strm targets"; }
+            get { return "Process Media targets"; }
         }
 
         public IEnumerable<TaskTriggerInfo> GetDefaultTriggers()

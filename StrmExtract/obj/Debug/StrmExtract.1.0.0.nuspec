@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>StrmExtract</id>
+    <version>1.0.0</version>
+    <authors>StrmExtract</authors>
+    <description>Package Description</description>
+    <repository type="git" commit="da1ce795093d27a00efa26ec1e37ec7312cc3fbd" />
+    <dependencies>
+      <group targetFramework=".NETStandard2.0">
+        <dependency id="System.Memory" version="4.5.5" exclude="Build,Analyzers" />
+        <dependency id="mediabrowser.server.core" version="4.7.9" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="C:\Users\menna\Source\Repos\MediaExtract\StrmExtract\bin\Debug\netstandard2.0\StrmExtract.dll" target="lib\netstandard2.0\StrmExtract.dll" />
+  </files>
+</package>

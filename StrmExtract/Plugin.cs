@@ -11,7 +11,7 @@ namespace StrmExtract
     {
 
         public static Plugin Instance { get; private set; }
-        public static string PluginName = "Strm Extract";
+        public static string PluginName = "Media Extract";
         private Guid _id = new Guid("6107fc8c-443a-4171-b70e-7590658706d8");
 
         public Plugin(IApplicationPaths applicationPaths, IXmlSerializer xmlSerializer) : base(applicationPaths, xmlSerializer)
@@ -37,7 +37,7 @@ namespace StrmExtract
         {
             get
             {
-                return "Extracts info from Strm targets";
+                return "Extracts info from targets filter by path_keywords";
             }
         }
 
